@@ -1,0 +1,12 @@
+
+
+<section class='admin'>
+	<h3>Update product</h3>
+<form action="/editProd/<%=singleProd._id%>" method="post">
+	<input type="text" name="title" value="<%=singleProd.title%>">
+	<textarea  name="desc"><%=singleProd.desc%></textarea>
+	<input type="number"  name="quantity" value="<%=singleProd.quantity%>">
+	<input type="number" name="price" value="<%=singleProd.price%>">
+	<input type="submit" name="Update">
+</form>
+</section>

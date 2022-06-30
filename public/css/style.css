@@ -1,0 +1,163 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	text-align: center;
+	font-family: "Roboto";
+	margin: 0;
+	font-size: 1.5em;
+}
+
+.title {
+	background-image: url('../img/apumarket.png');
+	background-position: center;
+	background-size: cover;
+	padding: 50px 0;
+	text-shadow: 2px 0 0 black, 2px 2px 0 black, 0 2px 0 black, -2px 2px 0 black, -2px 0 0 black, -2px -2px 0 black, 0 -2px 0 black, 2px -2px 0 black;
+	font-family: "Pacifico";
+	color: gold;
+}
+
+
+h1 {
+	font-size: 4em;
+}
+
+nav {
+	display: flex;
+	justify-content: space-around;
+	padding: 1% 0;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+nav a,
+.addProd {
+	text-shadow: 1px 0 0 black, 1px 1px 0 black, 0 1px 0 black, -1px 1px 0 black, -1px 0 0 black, -1px -1px 0 black, 0 -1px 0 black, 1px -1px 0 black;
+	font-family: "Pacifico";
+	color: gold;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+footer {
+	border-top: 1px solid black;
+}
+
+/* HOME */
+
+.home img {
+	width: 60%;
+}
+
+/* PRODUITS & PROFIL */
+
+.profil>div {
+	width: 50%;
+	margin: 1% auto;
+}
+
+.admin {
+	width: 80%;
+	margin: 1% auto;
+	justify-content: space-between;
+}
+
+.profil>div {
+	width: 30%;
+	background-color: silver;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+.produits {
+	margin: 1% auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.produitsDetail {
+	width: 200px;
+	margin: 1% auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: lightgray;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+
+span {
+	text-shadow: 0.5px 0 0 black, 1px 1px 0 black, 0 1px 0 black, -1px 1px 0 black, -1px 0 0 black, -1px -1px 0 black, 0 -1px 0 black, 1px -1px 0 black;
+	color: yellow;
+}
+
+.produits h3,
+.profil>div>h3 {
+	text-shadow: 1px 0 0 black, 1px 1px 0 black, 0 1px 0 black, -1px 1px 0 black, -1px 0 0 black, -1px -1px 0 black, 0 -1px 0 black, 1px -1px 0 black;
+	color: gold;
+}
+
+/* FORMULAIRES */
+
+form {
+	margin: 1% auto;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: silver;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+
+form input,
+form textarea {
+	padding: 1%;
+	margin: 2% auto;
+	width: 60%;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+/* ADMIN */
+
+.addProd {
+	text-shadow: 1px 0 0 black, 1px 1px 0 black, 0 1px 0 black, -1px 1px 0 black, -1px 0 0 black, -1px -1px 0 black, 0 -1px 0 black, 1px -1px 0 black;
+	color: gold;
+	text-decoration: none;
+}
+
+.addProd .fa {
+	margin: 0 5px;
+}
+
+table {
+	width: 70%;
+	margin: 1% auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th {
+	background-color: silver;
+}
+
+th,
+td {
+	padding: 10px 0;
+	border: 1px solid black;
+}
+
+table .fa {
+	color: red;
+}

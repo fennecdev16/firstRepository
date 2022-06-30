@@ -1,0 +1,13 @@
+
+	<h4>Our products</h4>
+<section class='produits'>
+         	<% for(let i = 0; i < products.length; i++) {
+         	%>
+				<div class="produitsDetail">
+					<h3><%= products[i].title %> </h3>
+					<h4><%= products[i].desc %> </h4>
+					<h4><span>Quantity: </span><%= products[i].quantity %> </h4>
+					<h4><span>Price: </span><%= products[i].price %><span> $</span> </h4>
+				 </div>
+			<% } %>
+</section>
