@@ -63,9 +63,6 @@ mongoose.Promise = global.Promise;
 
 // Adapter en fonction de la configuration sur le compte "Atlas"
 //const connectionString = 'mongodb+srv://monesma:azerty1234@monesma.6yr2g.mongodb.net/monesmadb?retryWrites=true&w=majority';
-const MONGO_USER = "sam"
-const MONGO_PASS = "DaklzxFN5W7WCI3C"
-const connectionString = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@cluster1.mszh97c.mongodb.net/3wademo?retryWrites=true&w=majority`
 
 // Connexion Ã  la base mongo ...
 mongoose
