@@ -6,7 +6,6 @@ module.exports = (app, db) => {
   //like / dislike a post
   app.put(
     "/api/v1/product/:productId/like",
-    withAuth,
     async (req, res, next) => {
       let product_id = req.params.productId;
       let key_id = req.body.key_id;
@@ -40,25 +39,13 @@ module.exports = (app, db) => {
         }
       }
 
-      /* if (isLikeExist.status !== 401) {
-          let user = await userModel.saveOneLike(req);
-          if (user.code) {
-            res.json({ status: 500, error: user });
-          } else {
-            res.json({ status: 200, results: user });
-          }
-        } else {
-          res.json({
-            status: 403,
-            error: "Something wrong with saving like ",
-          });
-        } */
+     
     }
   );
 
   //route to get likes of userId
 
-  app.post("/api/v1/product/like", withAuth, async (req, res, next) => {
+  app.post("/api/v1/product/like", async (req, res, next) => {
     let likesOfUser = await likeModel.getLikesOfUser(req.body.key_id);
     if (likesOfUser.code) {
       res.json({

@@ -31,10 +31,10 @@ class UserModel {
     }
     //on sauvegarde l'utilisateur
     const hash = await encryptPassword(req.body.password)
-    console.log(hash);
+   // console.log(hash);
     return db
       .query(
-        'INSERT INTO users (key_id, firstName, lastName, email, password, role, address, zip, city, country, phone,profilePicture, creationTimestamp, connexionTimestamp) VALUES (?, ?,?, ?, ?,  "user",?, ?, ?, ?, ?,"", NOW(), NOW())',
+        'INSERT INTO users (key_id, firstName, lastName, email, password, role, address,  phone,profilePicture, creationTimestamp, connexionTimestamp) VALUES (?, ?,?, ?, ?,  "user",?,  ?,"", NOW(), NOW())',
         [
           key_id,
           req.body.firstname,
@@ -42,9 +42,6 @@ class UserModel {
           req.body.email,
           hash,
           req.body.address,
-          req.body.zip,
-          req.body.city,
-          req.body.country,
           req.body.phone,
         ]
       )
@@ -110,14 +107,11 @@ class UserModel {
   static updateUser(req, userId) {
     return db
       .query(
-        "UPDATE users SET firstName = ?, lastName = ?, address = ?, zip = ?, city = ?, country=?, phone = ? WHERE key_id = ?",
+        "UPDATE users SET firstName = ?, lastName = ?, address = ?,  phone = ? WHERE key_id = ?",
         [
           req.body.firstname,
           req.body.lastname,
           req.body.address,
-          req.body.zip,
-          req.body.city,
-          req.body.country,
           req.body.phone,
           userId,
         ]
@@ -142,6 +136,7 @@ class UserModel {
         })
 }
 
+
 static getAllUsers() {
   return db.query('SELECT key_id, firstname, lastname, profilePicture FROM users')
   
@@ -154,19 +149,7 @@ static getAllUsers() {
 }
 // save refreshToken
 
-static saveRefreshToken(userId, refreshToken, validUntil) {
-  return db
-    .query(
-      'INSERT INTO refreshtoken (userId, refreshToken, validuntil) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE refreshToken = ?, validuntil = ?',
-      [userId, refreshToken, validUntil, refreshToken, validUntil]
-    )
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
-}
+ 
 
  //LOGOUT
  static deleteRefreshToken(userId) {
@@ -203,6 +186,19 @@ static updateRefreshToken(userId, refreshToken, validUntil) {
         userId
       ]
     )
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+
+static getUserByOrderNumber(orderId) {
+  return db
+    .query("SELECT * FROM  orders WHERE key_id = ?", [orderId])
+
     .then((response) => {
       return response;
     })

@@ -4,30 +4,61 @@ const withAuth = require("../middleware/withAuth");
 module.exports = (app, db) => {
   const productModel = require("../models/ProductModel")(db);
 
-  //route getting all products
-  app.get("/api/v1/product/all", async (req, res, next) => {
+  
+  //route getting all products Or by category
+  app.get("/api/v1/product/all/:categ", async (req, res, next) => {
+    const categ = req.params.categ;
+    if (!categ || categ === "undefined") {
     let products = await productModel.getAllProducts();
     if (products.code) {
       res.json({
         status: 500,
-        msg: `Something wrong with getting ${products}`,
+        msg: `Something wrong`,
+        err: products,
+      });
+    } else {
+      res.json({ status: 200, result: products, msg: "Ok" });
+    }} else{
+      
+      let cat;
+      switch (categ) {
+        case "Sport":
+          cat = "IsSport";
+          break;
+        case "Nature":
+          cat = "isNature";
+          break;
+        case "Adventure":
+          cat = "isAdventure";
+          break;
+        default:
+          break;
+      }
+      
+      let products = await productModel.getProductsByCat(cat);
+    if (products.code) {
+      res.json({
+        status: 500,
+        msg: `Something wrong`,
         err: products,
       });
     } else {
       res.json({ status: 200, result: products, msg: "Ok" });
     }
+    }
   });
-  //route getting Featured Products
   app.get("/api/v1/product/featured", async (req, res, next) => {
-    let featued = await productModel.getFeatured();
-    if (featued.code) {
-      res.json({
-        status: 500,
-        msg: `Something wrong with getting featued dishes`,
-        err: featued,
-      });
-    } else {
-      res.json({ status: 200, result: featued, msg: "Ok" });
+   
+      let featued = await productModel.getFeatured();
+      if (featued.code) {
+        res.json({
+          status: 500,
+          msg: `Something wrong`,
+          err: featued,
+        });
+      } else {
+        res.json({ status: 200, result: featued, msg: "Ok" });
+      
     }
   });
 
@@ -50,8 +81,9 @@ module.exports = (app, db) => {
   });
 
   //route to save one product ---OK
-  app.post("/api/v1/product/save", withAuth, async (req, res, next) => {
+  app.post("/api/v1/product/save", async (req, res, next) => {
     let product = await productModel.saveOneProduct(req);
+  
     if (product.code) {
       res.json({
         status: 500,
@@ -68,8 +100,9 @@ module.exports = (app, db) => {
   });
 
   //route upade one product
-  app.put("/api/v1/product/update/:id", async (req, res, next) => {
+  app.put("/api/v1/product/update/:id",  async (req, res, next) => {
     let id = parseInt(req.params.id);
+    if (!req.body) throw createError.BadRequest();
     let updateProduct = await productModel.updateOneProduct(req, id);
     if (updateProduct.code) {
       res.json({
@@ -112,16 +145,18 @@ module.exports = (app, db) => {
         });
       }
     }
-
-    // delete image article
-
-    /*   if (product[0].photo !== "no-pict.jpg") {
-      fs.unlink(`public/images/${product[0].photo}`, function (err) {
-        if (err) {
-          res.json({ status: 500, msg: `error with deleting image` });
-        }
+  });
+  //route getting all products
+  app.get("/api/v1/cat/all", async (req, res, next) => {
+    let products = await productModel.getCategories();
+    if (products.code) {
+      res.json({
+        status: 500,
+        msg: `Something wrong with getting ${cat}`,
+        err: products,
       });
+    } else {
+      res.json({ status: 200, result: products, msg: "Ok" });
     }
-    res.json({ status: 200, result: deleteProduct }); */
   });
 };

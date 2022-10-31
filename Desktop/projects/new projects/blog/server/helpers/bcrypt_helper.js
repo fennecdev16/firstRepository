@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
-const createError = require("http-errors");
-const saltRounds = 10;
+
 
  module.exports = {
   isValidPassword: async function(dbPassword, userPassword) {
@@ -19,16 +18,4 @@ const saltRounds = 10;
       throw error;
     }
   },
-}; 
-
-/* module.exports = async function isValidPassword(dbPassword, userPassword) {
-  try {
-    return await bcrypt.compare(dbPassword, userPassword);
-  } catch (error) {
-    throw error;
-  }
-}; */
-
-/* module.exports = async function encryptPassword(password) { 
-  return await bcrypt.hash(password, saltRounds)
-}; */
+};  
